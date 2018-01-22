@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
-class UserController extends Controller
+class UsersController extends Controller
 {
     /**
     *创建用户
