@@ -11,8 +11,13 @@ class UsersController extends Controller
     //__construct
     public function __construct()
     {
+        //登陆用户才允许访问个人中心，注册、保存用户
         $this->middleware('auth', [
             'except' => ['show', 'create', 'store']
+        ]);
+        //未登录用户可以注册
+        $this->middleware('guest', [
+            'only' => ['create']
         ]);
     }
     /**
