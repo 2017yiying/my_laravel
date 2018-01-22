@@ -52,6 +52,7 @@ class UsersController extends Controller
    //编辑用户
    public function edit(User $user)
    {
+       $this->authorize('update', $user);
        return view('users.edit', compact('user'));
    }
    //编辑提交
@@ -61,7 +62,9 @@ class UsersController extends Controller
             'name' => 'required|max:50',
             'password' => 'required|confirmed|min:6'
         ]);
-
+        $this->authorize('update', $user);
+        //$data = [];
+        //$data['name'] = $request->name;
         $user->update([
             'name' => $request->name,
             'password' => bcrypt($request->password),

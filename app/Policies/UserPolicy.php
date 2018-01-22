@@ -18,4 +18,9 @@ class UserPolicy
     {
         //
     }
+    //验证同一用户
+    public function update(User $currentUser, User $user)
+    {
+        return $currentUser->id === $user->id;
+    }
 }
