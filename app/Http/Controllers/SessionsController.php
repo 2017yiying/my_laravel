@@ -11,7 +11,7 @@ class SessionsController extends Controller
     public function create()
     {
         if(Auth::user()){
-            return redirect('show');
+            return redirect()->route('users.show', [Auth::user()]);
         }
         return view('sessions.create');
     }
