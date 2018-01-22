@@ -8,6 +8,13 @@ use App\Models\User;
 
 class UsersController extends Controller
 {
+    //__construct
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => ['show', 'create', 'store']
+        ]);
+    }
     /**
     *创建用户
     */
