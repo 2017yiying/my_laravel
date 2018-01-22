@@ -10,7 +10,7 @@ class SessionsController extends Controller
     //登陆
     public function create()
     {
-        if(Auth::user){
+        if(Auth::user()){
             return redirect('show');
         }
         return view('sessions.create');
