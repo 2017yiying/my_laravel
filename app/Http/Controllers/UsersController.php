@@ -23,7 +23,6 @@ class UsersController extends Controller
     //用户列表
     public function index()
     {
-        echo 'test';
         $users = User::all();
         return view('users.index', compact('users'));
     }
