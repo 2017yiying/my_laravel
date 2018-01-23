@@ -23,4 +23,9 @@ class UserPolicy
     {
         return $currentUser->id === $user->id;
     }
+    //验证是不是管理员
+    public function destroy(User $currentUser, User $user)
+    {
+        return $currentUser->is_admin && $currentUser->id !== $user->id;
+    }
 }
