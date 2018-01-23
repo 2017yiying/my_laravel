@@ -13,15 +13,21 @@ class UsersController extends Controller
     {
         //登陆用户才允许访问个人中心，注册、保存用户
         $this->middleware('auth', [
-            'except' => ['show', 'create', 'store']
+            'except' => ['show', 'create', 'store', 'index']
         ]);
-        //未登录用户可以注册
+        //只让未登录用户可以访问注册页面
         $this->middleware('guest', [
             'only' => ['create']
         ]);
     }
+    //用户列表
+    public function index()
+    {
+        $users = User::all();
+        return view('users.index', compact('users'));
+    }
     /**
-    *创建用户
+    *注册用户
     */
     public function create()
     {
@@ -35,7 +41,7 @@ class UsersController extends Controller
         return view('users.show', compact('user'));
     }
     /**
-    *保存用户
+    *保存注册用户
     */
     public function store(Request $request)
    {
@@ -68,12 +74,13 @@ class UsersController extends Controller
             'password' => 'required|confirmed|min:6'
         ]);
         $this->authorize('update', $user);
-        //$data = [];
-        //$data['name'] = $request->name;
+        $data = [];
+        $data['name'] = $request->name;
         $user->update([
             'name' => $request->name,
             'password' => bcrypt($request->password),
         ]);
+        $user->update($data);
         session()->flash('success', '个人资料更新成功！');
         return redirect()->route('users.show', $user->id);
     }
