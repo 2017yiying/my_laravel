@@ -17,8 +17,13 @@ class ForgotPasswordController extends Controller
     | your application to your users. Feel free to explore this trait.
     |
     */
-
-    use SendsPasswordResetEmails;
+    use ResetsPasswords;
+    /**
+     * Where to redirect users after resetting their password.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
